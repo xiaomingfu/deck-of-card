@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Card from './Card';
+import './Deck.css'
+
 const API_URL = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
 class Deck extends Component {
     constructor(props) {
@@ -37,11 +40,14 @@ class Deck extends Component {
         }
     }
     render() {
+        const cards = this.state.drawn.map((c) => (
+            <Card name={c.name} img={c.image} key={c.id} />))
         return (
-            <div>
-                <h1>Card Dealer</h1>
-                <button onClick={this.drawCard}>GIVE ME A CARD!</button>
-                <img src={this.state.drawn.image} />
+            <div className="Deck">
+                <h1 className="Deck-title">✥ Card Dealer ✥</h1>
+                <h2 className="Deck-title subtitle">✥ This is a Demo made with React ✥</h2>
+                <button className="Deck-btn" onClick={this.drawCard}>GIVE ME A CARD!</button>
+                <div className="Deck-area">{cards}</div>
             </div>
         )
     }
